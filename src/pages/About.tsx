@@ -129,42 +129,66 @@ const About = () => {
       </section>
 
       {/* Company Timeline */}
-      <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(120,119,198,0.3),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">Milestones that shaped our evolution</p>
+            <h2 className="text-5xl font-bold text-white mb-6 bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">
+              Our Evolution Journey
+            </h2>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              From humble beginnings to industry leadership - witness our transformation through the years
+            </p>
           </div>
           
+          {/* Horizontal Timeline */}
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600"></div>
+            {/* Progress line */}
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 rounded-full transform -translate-y-1/2 z-0"></div>
             
-            <div className="space-y-16">
+            {/* Timeline cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
               {timeline.map((item, index) => (
-                <div key={index} className="relative flex items-start group">
-                  {/* Timeline dot */}
-                  <div className="absolute left-6 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300"></div>
+                <div key={index} className="relative group">
+                  {/* Connector dot */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full border-4 border-white shadow-lg z-20 group-hover:scale-125 transition-all duration-300"></div>
                   
-                  {/* Content */}
-                  <div className="ml-20 flex-1">
-                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
-                      <div className="p-8">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                            {item.year}
-                          </span>
-                        </div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                        <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                      </div>
-                      {/* Decorative element */}
-                      <div className="h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-b-2xl"></div>
+                  {/* Card */}
+                  <div className={`backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 ${
+                    index % 2 === 0 ? 'mt-16' : 'mb-16'
+                  }`}>
+                    {/* Year badge */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="inline-flex items-center px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-lg font-bold rounded-full shadow-lg">
+                        {item.year}
+                      </span>
                     </div>
+                    
+                    {/* Content */}
+                    <div className="pt-8">
+                      <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-blue-100 leading-relaxed text-lg">
+                        {item.description}
+                      </p>
+                    </div>
+                    
+                    {/* Decorative elements */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-b-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl -z-10"></div>
                   </div>
                 </div>
               ))}
             </div>
+            
+            {/* Additional decorative elements */}
+            <div className="absolute top-0 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <div className="absolute bottom-0 right-1/3 w-3 h-3 bg-blue-400 rounded-full animate-pulse delay-1000"></div>
+            <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-white rounded-full animate-pulse delay-500"></div>
           </div>
         </div>
       </section>
