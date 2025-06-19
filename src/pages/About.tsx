@@ -129,34 +129,39 @@ const About = () => {
       </section>
 
       {/* Company Timeline */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">Key milestones that shaped CRC into the industry leader we are today</p>
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
+            <p className="text-xl text-gray-600">Milestones that shaped our evolution</p>
           </div>
           
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200"></div>
-            <div className="space-y-12">
+            {/* Vertical line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600"></div>
+            
+            <div className="space-y-16">
               {timeline.map((item, index) => (
-                <div key={index} className={`flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
-                    <Card className="hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <CardTitle className="text-lg">{item.title}</CardTitle>
-                          <span className="text-2xl font-bold text-blue-600">{item.year}</span>
+                <div key={index} className="relative flex items-start group">
+                  {/* Timeline dot */}
+                  <div className="absolute left-6 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300"></div>
+                  
+                  {/* Content */}
+                  <div className="ml-20 flex-1">
+                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+                      <div className="p-8">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                            {item.year}
+                          </span>
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription className="text-gray-600">
-                          {item.description}
-                        </CardDescription>
-                      </CardContent>
-                    </Card>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                        <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                      </div>
+                      {/* Decorative element */}
+                      <div className="h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-b-2xl"></div>
+                    </div>
                   </div>
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white"></div>
                 </div>
               ))}
             </div>
