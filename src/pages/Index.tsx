@@ -1,12 +1,177 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight, BarChart3, Database, Shield, Users, TrendingUp, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
+  const services = [
+    {
+      icon: BarChart3,
+      title: "Market Research Analysis",
+      description: "Comprehensive market analysis and consumer insights to drive strategic decision-making."
+    },
+    {
+      icon: Database,
+      title: "Chemxpert Database",
+      description: "Advanced techno-commercial insights database for chemical industry professionals."
+    },
+    {
+      icon: Shield,
+      title: "Regulatory Services",
+      description: "Expert regulatory guidance and compliance solutions for global markets."
+    }
+  ];
+
+  const stats = [
+    { number: "11+", label: "Years of Excellence" },
+    { number: "500+", label: "Projects Completed" },
+    { number: "150+", label: "Global Clients" },
+    { number: "50+", label: "Industry Experts" }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 text-white">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                Right Data,<br />
+                <span className="text-blue-300">Right Decision</span>
+              </h1>
+              <p className="text-xl text-blue-100 max-w-lg">
+                Empowering businesses with comprehensive market research and data-driven insights since 2013. Transform your strategic decisions with our expert analysis.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50">
+                  Discover Our Insights
+                  <ArrowRight className="ml-2" size={20} />
+                </Button>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900">
+                  Learn More
+                </Button>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <div className="grid grid-cols-2 gap-6">
+                  {stats.map((stat, index) => (
+                    <div key={index} className="text-center">
+                      <div className="text-3xl font-bold text-blue-300">{stat.number}</div>
+                      <div className="text-sm text-blue-100">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Introduction Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">About CRC Market Research</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Established in 2013, CRC has been at the forefront of market research innovation, 
+              committed to delivering growth-oriented insights that empower businesses to make informed decisions.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center">
+              <CardHeader>
+                <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                <CardTitle>Excellence</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Award-winning research methodologies and industry recognition for quality insights.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardHeader>
+                <TrendingUp className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                <CardTitle>Growth Focus</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Dedicated to identifying growth opportunities and market trends for our clients.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardHeader>
+                <Users className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                <CardTitle>Expert Team</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Industry veterans with deep expertise across multiple sectors and markets.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Core Services</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Comprehensive solutions designed to meet your market research and business intelligence needs.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                <CardHeader>
+                  <service.icon className="w-12 h-12 text-blue-600 mb-4" />
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600 mb-4">
+                    {service.description}
+                  </CardDescription>
+                  <Button variant="outline" className="w-full">
+                    Learn More
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Make Data-Driven Decisions?</h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join hundreds of companies that trust CRC for their market research needs. 
+            Let's transform your business insights together.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/contact">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
+                Get Started Today
+                <ArrowRight className="ml-2" size={20} />
+              </Button>
+            </Link>
+            <Link to="/about">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+                Learn About Us
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
