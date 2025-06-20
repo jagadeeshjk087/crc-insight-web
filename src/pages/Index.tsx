@@ -1,10 +1,57 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, BarChart3, Database, Shield, Users, TrendingUp, Award } from "lucide-react";
+import { ArrowRight, BarChart3, Database, Shield, Users, TrendingUp, Award, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Index = () => {
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  const banners = [
+    {
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&h=600&fit=crop",
+      title: "Market Intelligence",
+      subtitle: "Data-Driven Decisions",
+      description: "Transform your business strategy with comprehensive market research and consumer insights that drive growth.",
+      primaryButton: "Explore Market Data",
+      secondaryButton: "View Case Studies"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
+      title: "Industry Expertise",
+      subtitle: "11+ Years of Excellence",
+      description: "Leading chemical industry research with deep technical knowledge and regulatory compliance expertise.",
+      primaryButton: "Our Expertise",
+      secondaryButton: "Industry Reports"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
+      title: "Global Reach",
+      subtitle: "Worldwide Solutions",
+      description: "Serving 150+ global clients with tailored research solutions and strategic business intelligence.",
+      primaryButton: "Global Services",
+      secondaryButton: "Client Success"
+    }
+  ];
+
+  // Auto-rotate banners every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToPrevious = () => {
+    setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length);
+  };
+
+  const goToNext = () => {
+    setCurrentBanner((prev) => (prev + 1) % banners.length);
+  };
+
   const services = [
     {
       icon: BarChart3,
@@ -30,54 +77,53 @@ const Index = () => {
     { number: "50+", label: "Industry Experts" }
   ];
 
-  const bannerImages = [
-    "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop"
-  ];
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Scrolling Banner */}
-      <section className="relative h-screen overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600">
-        {/* Scrolling Background Images */}
+      {/* Hero Section with Banner Slider */}
+      <section className="relative h-screen overflow-hidden">
+        {/* Banner Images */}
         <div className="absolute inset-0">
-          <div className="flex animate-[scroll_15s_linear_infinite] w-[300%]">
-            {[...bannerImages, ...bannerImages, ...bannerImages].map((image, index) => (
+          {banners.map((banner, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentBanner ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
               <div
-                key={index}
-                className="w-1/3 h-screen bg-cover bg-center opacity-30"
-                style={{ backgroundImage: `url(${image})` }}
+                className="w-full h-full bg-cover bg-center"
+                style={{ backgroundImage: `url(${banner.image})` }}
               />
-            ))}
-          </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-blue-800/60 to-blue-600/50"></div>
+            </div>
+          ))}
         </div>
-        
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
         
         {/* Content */}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-            <div className="space-y-8 animate-fade-in">
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-white">
-                Right Data,<br />
-                <span className="text-blue-300">Right Decision</span>
-              </h1>
-              <p className="text-xl text-blue-100 max-w-lg">
-                Empowering businesses with comprehensive market research and data-driven insights since 2013. Transform your strategic decisions with our expert analysis.
-              </p>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-white">
+                  {banners[currentBanner].title}
+                  <br />
+                  <span className="text-blue-300">{banners[currentBanner].subtitle}</span>
+                </h1>
+                <p className="text-xl text-blue-100 max-w-lg">
+                  {banners[currentBanner].description}
+                </p>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 hover:scale-105 transition-all duration-300">
-                  Discover Our Insights
+                  {banners[currentBanner].primaryButton}
                   <ArrowRight className="ml-2" size={20} />
                 </Button>
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900 hover:scale-105 transition-all duration-300">
-                  Learn More
+                  {banners[currentBanner].secondaryButton}
                 </Button>
               </div>
             </div>
-            <div className="relative animate-[fade-in_1s_ease-out_0.5s_both]">
+            <div className="relative">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
                 <div className="grid grid-cols-2 gap-6">
                   {stats.map((stat, index) => (
@@ -90,6 +136,33 @@ const Index = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all duration-300 hover:scale-110"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+        <button
+          onClick={goToNext}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all duration-300 hover:scale-110"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
+
+        {/* Banner Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {banners.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentBanner(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentBanner ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
+              }`}
+            />
+          ))}
         </div>
       </section>
 
