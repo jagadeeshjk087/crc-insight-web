@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, BarChart3, Database, Shield, Users, TrendingUp, Award, ChevronLeft, ChevronRight } from "lucide-react";
@@ -35,11 +34,11 @@ const Index = () => {
     }
   ];
 
-  // Auto-rotate banners every 2 seconds
+  // Auto-rotate banners every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % banners.length);
-    }, 2000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
