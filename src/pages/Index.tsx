@@ -30,15 +30,37 @@ const Index = () => {
     { number: "50+", label: "Industry Experts" }
   ];
 
+  const bannerImages = [
+    "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&h=600&fit=crop",
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop"
+  ];
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+      {/* Hero Section with Scrolling Banner */}
+      <section className="relative h-screen overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600">
+        {/* Scrolling Background Images */}
+        <div className="absolute inset-0">
+          <div className="flex animate-[scroll_15s_linear_infinite] w-[300%]">
+            {[...bannerImages, ...bannerImages, ...bannerImages].map((image, index) => (
+              <div
+                key={index}
+                className="w-1/3 h-screen bg-cover bg-center opacity-30"
+                style={{ backgroundImage: `url(${image})` }}
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        {/* Content */}
+        <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+            <div className="space-y-8 animate-fade-in">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-white">
                 Right Data,<br />
                 <span className="text-blue-300">Right Decision</span>
               </h1>
@@ -46,20 +68,20 @@ const Index = () => {
                 Empowering businesses with comprehensive market research and data-driven insights since 2013. Transform your strategic decisions with our expert analysis.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50">
+                <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 hover:scale-105 transition-all duration-300">
                   Discover Our Insights
                   <ArrowRight className="ml-2" size={20} />
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900 hover:scale-105 transition-all duration-300">
                   Learn More
                 </Button>
               </div>
             </div>
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div className="relative animate-[fade-in_1s_ease-out_0.5s_both]">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
                 <div className="grid grid-cols-2 gap-6">
                   {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
+                    <div key={index} className="text-center hover:scale-110 transition-transform duration-300">
                       <div className="text-3xl font-bold text-blue-300">{stat.number}</div>
                       <div className="text-sm text-blue-100">{stat.label}</div>
                     </div>
